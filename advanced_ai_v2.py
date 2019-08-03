@@ -187,8 +187,8 @@ def analysis(pos, game, situation):
     if(cell.owner != game.me.uid and cell.building.name == 'fortress'):
         score -= 5
     if(isNearHome(pos, situation)):
-        #score += 50
-        pass
+        score += 50
+        #pass
     return float(score / cell.attack_cost)
 
 
@@ -225,11 +225,12 @@ game = Colorfight()
 
 # Connect to the server. This will connect to the public room. If you want to
 # join other rooms, you need to change the argument
-game.connect(room = 'Acropolis')
+game.connect(room = 'public')
 
 #Musikverein
 #public
 #Acropolis
+#rank_2_1
 
 # game.register should return True if succeed.
 # As no duplicate usernames are allowed, a random integer string is appended
@@ -239,7 +240,7 @@ game.connect(room = 'Acropolis')
 # as the password. You should change it to something that will not change 
 # between runs so you can continue the game if disconnected.
 i = 1
-while(True):
+while( i != 3):
     if game.register(username = 'Degadon', \
             password = '2019Color'):
         # This is the game loop
@@ -349,12 +350,11 @@ while(True):
 
             #Attack
             orderlyList = attackList(situation.cellsToAttack, situation, game)
-            #print("Cells: ", len(me.cells), " Buildings", situation.buildCount + 75)
+            print("Cells: ", len(me.cells), " Buildings", situation.buildCount + 75)
             boolAttack = True
             if(len(me.cells) >= situation.buildCount + 75):
-                #orderlyList = []
-                #boolAttack = False
-                pass
+                orderlyList = []
+                boolAttack = False
             print(len(orderlyList))
             if(boolAttack):
                 for pos in orderlyList:
